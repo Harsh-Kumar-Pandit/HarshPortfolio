@@ -19,13 +19,20 @@ const CSS = `
     50%    { clip-path:path('M210,46 C308,28 400,112 392,244 C384,376 306,466 214,456 C122,446 36,370 42,246 C48,122 112,64 210,46 Z'); }
     75%    { clip-path:path('M228,34 C324,46 404,128 392,258 C380,388 300,460 210,450 C120,440 38,362 44,240 C50,118 132,22 228,34 Z'); }
   }
-  .hb-img {
+  .hb-mask {
     width: 440px;
     height: 500px;
+    animation: hbClip 11s ease-in-out infinite;
+    position: relative;
+  }
+  .hb-img {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     object-position: center top;   /* face-first crop */
     display: block;
-    animation: hbClip 11s ease-in-out infinite;
+    transform-origin: top center;
+    transform: scale(1.05) translateY(25px); /* Perfectly aligns the head within the mask */
   }
   .hb-unit { transform-origin: center center; }
   @media(max-width:1024px){ .hb-unit{ transform:scale(0.8);  } }
@@ -135,7 +142,7 @@ export default function HeroPortrait() {
         </svg>
 
         {/* ── Portrait (morphing clip-path mask) ───────────── */}
-        <div style={{ position:'relative', zIndex:2 }}>
+        <div className="hb-mask" style={{ position:'relative', zIndex:2 }}>
           <img
             className="hb-img"
             src="/assets/images/HarshPanditHero.png"
