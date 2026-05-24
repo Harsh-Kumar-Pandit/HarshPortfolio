@@ -1,0 +1,27 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="crossbarGradient" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#D0BCFF" /> <!-- Lighter purple on bottom left -->
+      <stop offset="100%" stop-color="#8B5CF6" /> <!-- Darker primary purple on top right -->
+    </linearGradient>
+    <style>
+      .h-bars {
+        fill: #0F172A; /* Default to dark color for light mode */
+      }
+      @media (prefers-color-scheme: dark) {
+        .h-bars {
+          fill: #FFFFFF; /* White color for dark mode */
+        }
+      }
+    </style>
+  </defs>
+  
+  <!-- Left Vertical Bar -->
+  <rect x="20" y="15" width="22" height="70" class="h-bars" />
+  
+  <!-- Right Vertical Bar -->
+  <rect x="58" y="15" width="22" height="70" class="h-bars" />
+  
+  <!-- Diagonal Crossbar -->
+  <polygon points="20,55 80,25 80,47 20,77" fill="url(#crossbarGradient)" />
+</svg>
