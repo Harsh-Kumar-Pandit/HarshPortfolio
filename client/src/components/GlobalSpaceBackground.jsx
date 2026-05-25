@@ -1,104 +1,75 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { useTheme } from '../hooks/useTheme';
 
-const generateParticles = (count, isDark) => {
-  return Array.from({ length: count }).map((_, i) => ({
-    id: i,
-    x: Math.random() * 100, // %
-    y: Math.random() * 100, // %
-    size: Math.random() * 2 + 1, // 1px to 3px
-    opacityStart: Math.random() * 0.3 + 0.1,
-    opacityPeak: Math.random() * 0.4 + 0.3,
-    floatDuration: 15 + Math.random() * 15, // 15s to 30s
-    pulseDuration: 3 + Math.random() * 4, // 3s to 7s
-    xDrift: -5 + Math.random() * 10, // -5px to 5px
-    yDrift: -20 - Math.random() * 20, // -20px to -40px upward
-  }));
-};
-
 const GlobalSpaceBackground = () => {
   const { isDark } = useTheme();
-  const [particles, setParticles] = useState([]);
-
-  useEffect(() => {
-    // Generate particles once on mount/theme change
-    setParticles(generateParticles(35, isDark));
-  }, [isDark]);
 
   return (
-    <div className="fixed inset-0 pointer-events-none -z-50 overflow-hidden bg-background transition-colors duration-700">
+    <div className="fixed inset-0 pointer-events-none -z-50 overflow-hidden transition-colors duration-500 bg-background">
       
-      {/* ---------------- BACKGROUND GRADIENT ---------------- */}
-      <div className="absolute inset-0">
-        {isDark ? (
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-[#0A0F1F] via-[#050816] to-[#02030A] opacity-90" />
-        ) : (
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-[#F3E8FF] via-[#F8FAFC] to-[#FFFFFF] opacity-90" />
-        )}
+      {/* ── 1. Gradient Base ── */}
+      <div 
+        className={`absolute inset-0 transition-opacity duration-700 ${
+          isDark 
+            ? 'bg-gradient-to-b from-[#020204] via-[#06060f] to-[#020204] opacity-100' 
+            : 'bg-gradient-to-b from-[#fcfcfd] via-[#f8fafc] to-[#f1f5f9] opacity-100'
+        }`} 
+      />
+
+      {/* ── 2. Adaptive Grid Lines with Sidebar Masking ── */}
+      <div 
+        className="absolute inset-0 transition-all duration-500" 
+        style={{
+          backgroundImage: isDark
+            ? `
+              linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
+              linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px)
+            `
+            : `
+              linear-gradient(to right, rgba(15,23,42,0.035) 1px, transparent 1px),
+              linear-gradient(to bottom, rgba(15,23,42,0.035) 1px, transparent 1px)
+            `,
+          backgroundSize: '48px 48px',
+          maskImage: 'linear-gradient(to right, rgba(0,0,0,0) 0px, rgba(0,0,0,0) 88px, rgba(0,0,0,1) 140px)',
+          WebkitMaskImage: 'linear-gradient(to right, rgba(0,0,0,0) 0px, rgba(0,0,0,0) 88px, rgba(0,0,0,1) 140px)'
+        }}
+      />
+
+      {/* ── 3. Subtle Ambient Flows (Faint SaaS lights) ── */}
+      <div className={`absolute inset-0 transition-opacity duration-500 ${isDark ? 'opacity-20' : 'opacity-100'}`}>
+        <motion.div 
+          animate={{ 
+            x: [0, 30, -15, 0], 
+            y: [0, -20, 15, 0],
+            scale: [1, 1.03, 0.97, 1] 
+          }} 
+          transition={{ duration: 40, repeat: Infinity, ease: "easeInOut" }}
+          className={`absolute top-[-10%] left-[-15%] w-[60vw] h-[60vh] blur-[130px] rounded-full ${
+            isDark ? 'bg-indigo-500/10' : 'bg-indigo-200/25'
+          }`} 
+        />
+        <motion.div 
+          animate={{ 
+            x: [0, -20, 20, 0], 
+            y: [0, 30, -15, 0],
+            scale: [1, 0.97, 1.03, 1] 
+          }} 
+          transition={{ duration: 45, repeat: Infinity, ease: "easeInOut" }}
+          className={`absolute bottom-[-15%] right-[-10%] w-[50vw] h-[55vh] blur-[140px] rounded-full ${
+            isDark ? 'bg-blue-500/10' : 'bg-sky-200/20'
+          }`} 
+        />
       </div>
 
-      {/* ---------------- NEBULA HAZE ---------------- */}
-      <div className="absolute inset-0 opacity-40">
-        {isDark ? (
-          <>
-            <motion.div 
-              animate={{ x: [0, 50, 0], y: [0, -30, 0] }} 
-              transition={{ duration: 45, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -top-[10%] -left-[10%] w-[60%] h-[60%] bg-primary/10 blur-[130px] rounded-full" 
-            />
-            <motion.div 
-              animate={{ x: [0, -40, 0], y: [0, 40, 0] }} 
-              transition={{ duration: 55, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -bottom-[10%] -right-[10%] w-[60%] h-[60%] bg-blue-500/5 blur-[150px] rounded-full" 
-            />
-          </>
-        ) : (
-          <>
-            <motion.div 
-              animate={{ x: [0, 30, 0], y: [0, 20, 0] }} 
-              transition={{ duration: 40, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -top-[10%] left-[10%] w-[50%] h-[50%] bg-primary/5 blur-[120px] rounded-full" 
-            />
-            <motion.div 
-              animate={{ x: [0, -20, 0], y: [0, -30, 0] }} 
-              transition={{ duration: 50, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute bottom-[10%] -right-[10%] w-[70%] h-[70%] bg-blue-300/5 blur-[140px] rounded-full" 
-            />
-          </>
-        )}
-      </div>
-
-      {/* ---------------- FLOATING PARTICLES ---------------- */}
-      <div className="absolute inset-0">
-        {particles.map((p) => (
-          <motion.div
-            key={`particle-${p.id}-${isDark}`}
-            initial={{ 
-              x: 0, 
-              y: 0, 
-              opacity: p.opacityStart 
-            }}
-            animate={{ 
-              x: [0, p.xDrift, 0],
-              y: [0, p.yDrift, 0],
-              opacity: [p.opacityStart, p.opacityPeak, p.opacityStart] 
-            }}
-            transition={{ 
-              x: { duration: p.floatDuration, repeat: Infinity, ease: "easeInOut" },
-              y: { duration: p.floatDuration * 1.2, repeat: Infinity, ease: "linear" },
-              opacity: { duration: p.pulseDuration, repeat: Infinity, ease: "easeInOut" }
-            }}
-            className={`absolute rounded-full ${isDark ? 'bg-white' : 'bg-primary/50'}`}
-            style={{
-              left: `${p.x}%`,
-              top: `${p.y}%`,
-              width: p.size,
-              height: p.size,
-              boxShadow: isDark ? `0 0 ${p.size * 2}px rgba(56, 189, 248, 0.4)` : 'none' // Subtle #38BDF8 accent in dark mode
-            }}
-          />
-        ))}
+      {/* ── 4. Grain/Noise Overlay ── */}
+      <div className={`absolute inset-0 transition-opacity duration-500 mix-blend-overlay ${isDark ? 'opacity-[0.18]' : 'opacity-[0.06]'}`}>
+        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+          <filter id="globalNoiseFilter">
+            <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch" />
+          </filter>
+          <rect width="100%" height="100%" filter="url(#globalNoiseFilter)" />
+        </svg>
       </div>
 
     </div>

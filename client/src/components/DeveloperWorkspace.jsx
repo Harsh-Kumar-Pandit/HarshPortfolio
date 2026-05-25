@@ -44,7 +44,7 @@ const DeveloperWorkspace = () => {
       ref={containerRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={() => { mouseX.set(0); mouseY.set(0); }}
-      className="relative w-full aspect-square max-w-md mx-auto rounded-3xl overflow-hidden glass-card border border-outline-variant/20 shadow-[0_12px_40px_rgba(0,0,0,0.15)] dark:shadow-[0_12px_40px_rgba(0,0,0,0.5)] bg-[#0a0a0a]"
+      className="relative w-full aspect-square max-w-md mx-auto rounded-3xl overflow-hidden bg-[#050505] border border-white/10 shadow-2xl"
     >
       {/* Background Image Crossfade (Scaled slightly to hide edges during parallax) */}
       <motion.div style={{ x: bgX, y: bgY }} className="absolute -inset-6">
