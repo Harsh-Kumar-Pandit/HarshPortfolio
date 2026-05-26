@@ -34,7 +34,7 @@ const About = () => {
         <meta name="description" content="Discover Harsh Kumar Pandit's development philosophy, specialized technical capabilities, B.Tech CSE background, and personal story." />
       </Helmet>
 
-      <div className="pt-12 space-y-24 pb-24">
+      <div className="pt-24 md:pt-12 space-y-24 pb-24">
         {/* ================= HERO SECTION ================= */}
         <RevealSection className="max-w-container-max mx-auto px-gutter py-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">

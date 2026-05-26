@@ -34,7 +34,7 @@ export default function HeroPortrait() {
   };
 
   return (
-    <div className="relative flex items-center justify-center w-[280px] h-[340px] sm:w-[330px] sm:h-[400px] mx-auto perspective-[1000px] select-none z-10">
+    <div className="relative flex items-center justify-center w-[250px] h-[300px] min-[360px]:w-[270px] min-[360px]:h-[325px] min-[390px]:w-[290px] min-[390px]:h-[350px] sm:w-[330px] sm:h-[400px] mx-auto perspective-[1000px] select-none z-10">
       
       {/* ── Layer 1: Soft Outer Ambient Glow (Extremely minimal & elegant) ── */}
       <div 

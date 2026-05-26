@@ -34,7 +34,7 @@ const Projects = () => {
         <meta name="description" content="Explore selected developer projects built by Harsh Kumar Pandit. Dynamic, interactive web apps, real-time messaging, and AI dashboards." />
       </Helmet>
 
-      <div className="pt-12 space-y-12 pb-24">
+      <div className="pt-24 md:pt-12 space-y-12 pb-24">
         {/* ================= HERO SECTION ================= */}
         <section className="max-w-container-max mx-auto px-gutter py-12 grid grid-cols-1 md:grid-cols-2 items-center gap-12 overflow-hidden">
           <div className="space-y-6">
@@ -132,18 +132,18 @@ const Projects = () => {
         </section>
 
         {/* ================= FILTER BAR ================= */}
-        <div id="all-projects" className="sticky top-6 z-30 px-gutter py-4 bg-[#f8f9fb]/60 dark:bg-white/[0.02] backdrop-blur-xl border border-slate-200 dark:border-white/5 rounded-[2rem] max-w-container-max mx-auto shadow-sm">
+        <div id="all-projects" className="sticky top-6 z-30 px-4 md:px-gutter py-3 md:py-4 bg-[#f8f9fb]/60 dark:bg-white/[0.02] backdrop-blur-xl border border-slate-200 dark:border-white/5 rounded-[2rem] max-w-container-max mx-auto shadow-sm">
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
             
             {/* Category tabs */}
-            <div className="flex p-1 bg-slate-900/5 dark:bg-white/5 rounded-full border border-slate-200 dark:border-white/5 overflow-x-auto max-w-full">
+            <div className="flex p-1 bg-slate-900/5 dark:bg-white/5 rounded-full border border-slate-200 dark:border-white/5 overflow-x-auto no-scrollbar max-w-full">
               {categories.map(cat => {
                 const isActive = selectedCategory === cat;
                 return (
                   <button
                     key={cat}
                     onClick={() => setSelectedCategory(cat)}
-                    className={`px-5 py-2 rounded-full text-xs font-semibold transition-all duration-300 relative ${
+                    className={`px-5 py-2 rounded-full text-xs font-semibold transition-all duration-300 relative whitespace-nowrap ${
                       isActive 
                         ? 'text-slate-900 dark:text-black font-semibold' 
                         : 'text-slate-500/60 dark:text-white/40 hover:text-slate-900 dark:hover:text-white/80'

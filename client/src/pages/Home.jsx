@@ -99,7 +99,7 @@ const Home = () => {
         {/* Isolated particles and ambient glows for Hero */}
         <HeroBackground />
         
-        <section className="relative z-10 px-gutter w-full max-w-container-max mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center pt-12 md:pt-16 pb-20">
+        <section className="relative z-10 px-gutter w-full max-w-container-max mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center pt-24 md:pt-16 pb-20">
             
           {/* ── Left Content ── */}
           <motion.div 
@@ -119,8 +119,8 @@ const Home = () => {
             {/* Headline */}
             <div className="space-y-4">
               <RevealSection delay={0.1}>
-                <h1 className="font-sans text-5xl sm:text-6xl lg:text-7xl font-extrabold text-slate-900 dark:text-white leading-[1.1] tracking-tighter">
-                  Crafting <span className="bg-gradient-to-r from-indigo-600 via-purple-600 to-sky-500 bg-clip-text text-transparent dark:from-indigo-400 dark:via-purple-400 dark:to-sky-400 font-serif italic font-light">Digital</span><br className="hidden md:block"/>
+                <h1 className="font-sans text-4xl min-[360px]:text-5xl sm:text-6xl lg:text-7xl font-extrabold text-slate-900 dark:text-white leading-[1.1] tracking-tighter">
+                  Crafting <span className="bg-gradient-to-r from-indigo-600 via-purple-600 to-sky-500 bg-clip-text text-transparent dark:from-indigo-400 dark:via-purple-400 dark:to-sky-400 font-serif italic font-light">Digital</span>{" "}<br className="hidden md:block"/>
                   Experiences
                 </h1>
               </RevealSection>

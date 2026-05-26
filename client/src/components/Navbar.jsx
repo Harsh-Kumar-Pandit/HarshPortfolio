@@ -66,11 +66,16 @@ const Navbar = () => {
   };
 
   // Gentle float keyframes
+  const dockInitial = isMobile 
+    ? { x: "-50%", y: 0 } 
+    : { x: 0, y: "-50%" };
+
   const dockAnimate = isMobile 
-    ? { y: [0, -4, 0] } 
-    : { y: ["-50%", "-51.5%", "-50%"] };
+    ? { x: "-50%", y: [0, -4, 0] } 
+    : { x: 0, y: ["-50%", "-51.5%", "-50%"] };
 
   const dockTransition = {
+    x: { type: "spring", stiffness: 300, damping: 30 },
     y: {
       duration: 6,
       repeat: Infinity,
@@ -82,23 +87,23 @@ const Navbar = () => {
     <>
       {/* Floating Vertical/Horizontal Dock */}
       <motion.nav 
-        initial={isMobile ? { y: 0 } : { y: "-50%" }}
+        initial={dockInitial}
         animate={dockAnimate}
         transition={dockTransition}
-        className="fixed z-50 flex flex-row items-center gap-3 p-3 rounded-full
-          bottom-4 left-1/2 -translate-x-1/2
-          md:bottom-auto md:left-6 md:top-1/2 md:-translate-y-1/2 md:translate-x-0 md:flex-col md:p-4.5 md:rounded-[2.5rem]
-          glass-nav transition-all duration-300 w-[92%] max-w-[400px] md:w-16 justify-between md:justify-center"
+        className="fixed z-50 flex flex-row items-center gap-2.5 p-2.5 rounded-full
+          bottom-4 left-1/2
+          md:bottom-auto md:left-6 md:top-1/2 md:flex-col md:p-4.5 md:rounded-[2.5rem]
+          glass-nav transition-all duration-300 w-auto max-w-[95%] md:w-16 justify-center"
       >
         {/* Mount Entry Animation Wrapper */}
         <motion.div
           initial={{ opacity: 0, scale: 0.85 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ type: "spring", stiffness: 180, damping: 18, delay: 0.15 }}
-          className="flex flex-row md:flex-col items-center justify-between md:justify-center w-full h-full"
+          className="flex flex-row md:flex-col items-center justify-center w-full h-full gap-2 md:gap-0"
         >
           {/* Nav Links */}
-          <div className="flex flex-row md:flex-col gap-3 md:gap-5.5 w-full items-center justify-around md:justify-center">
+          <div className="flex flex-row md:flex-col gap-1.5 md:gap-5.5 items-center justify-center">
             {navLinks.map((link) => {
               const isActive = location.pathname === link.path;
               const Icon = link.icon;
@@ -107,7 +112,7 @@ const Navbar = () => {
                 <Link
                   key={link.name}
                   to={link.path}
-                  className="relative flex items-center justify-center w-11 h-11 rounded-full group/link shrink-0"
+                  className="relative flex items-center justify-center w-9 h-9 min-[360px]:w-10 min-[360px]:h-10 md:w-11 md:h-11 rounded-full group/link shrink-0"
                   onMouseEnter={() => setHoveredIndex(link.name)}
                   onMouseLeave={() => setHoveredIndex(null)}
                 >
@@ -155,7 +160,7 @@ const Navbar = () => {
                         className="flex items-center justify-center w-full h-full"
                       >
                         <Icon 
-                          className={`w-5 h-5 transition-colors duration-300 relative z-10 ${
+                          className={`w-4.5 h-4.5 min-[360px]:w-5 min-[360px]:h-5 transition-colors duration-300 relative z-10 ${
                             isActive 
                               ? 'text-slate-950 dark:text-white' 
                               : 'text-slate-400 dark:text-white/40 group-hover/link:text-slate-800 dark:group-hover/link:text-white/80'
@@ -190,15 +195,15 @@ const Navbar = () => {
           </div>
 
           {/* Divider */}
-          <div className="hidden md:block w-9 h-[1px] bg-slate-900/10 dark:bg-white/10 my-3 shrink-0" />
+          <div className="w-[1px] h-6 bg-slate-900/10 dark:bg-white/10 mx-1 md:w-9 md:h-[1px] md:my-3 md:mx-0 shrink-0" />
 
           {/* Theme and CV controls */}
-          <div className="flex flex-row md:flex-col gap-3 md:gap-5.5 items-center">
+          <div className="flex flex-row md:flex-col gap-1.5 md:gap-5.5 items-center justify-center">
             
             {/* Theme Switcher */}
             <button
               onClick={toggleTheme}
-              className="relative flex items-center justify-center w-11 h-11 rounded-full group/btn hover:bg-slate-900/[0.04] dark:hover:bg-white/5 transition-colors shrink-0"
+              className="relative flex items-center justify-center w-9 h-9 min-[360px]:w-10 min-[360px]:h-10 md:w-11 md:h-11 rounded-full group/btn hover:bg-slate-900/[0.04] dark:hover:bg-white/5 transition-colors shrink-0"
               onMouseEnter={() => setHoveredIndex('theme')}
               onMouseLeave={() => setHoveredIndex(null)}
             >
@@ -219,7 +224,7 @@ const Navbar = () => {
                         transition={{ duration: 0.2 }}
                         className="text-slate-400 dark:text-white/40 group-hover/btn:text-slate-800 dark:group-hover/btn:text-white/80 transition-colors"
                       >
-                        {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+                        {isDark ? <Sun className="w-4.5 h-4.5 min-[360px]:w-5 min-[360px]:h-5" /> : <Moon className="w-4.5 h-4.5 min-[360px]:w-5 min-[360px]:h-5" />}
                       </motion.div>
                     </AnimatePresence>
                   </motion.div>
@@ -249,7 +254,7 @@ const Navbar = () => {
             {/* Download Resume CV */}
             <button 
               onClick={handleResumeDownload}
-              className="relative flex items-center justify-center w-11 h-11 rounded-full group/btn hover:bg-slate-900/[0.04] dark:hover:bg-white/5 transition-colors shrink-0"
+              className="relative flex items-center justify-center w-9 h-9 min-[360px]:w-10 min-[360px]:h-10 md:w-11 md:h-11 rounded-full group/btn hover:bg-slate-900/[0.04] dark:hover:bg-white/5 transition-colors shrink-0"
               onMouseEnter={() => setHoveredIndex('resume')}
               onMouseLeave={() => setHoveredIndex(null)}
             >
@@ -261,7 +266,7 @@ const Navbar = () => {
                     transition={{ type: "spring", stiffness: 400, damping: 15 }}
                     className="flex items-center justify-center text-slate-400 dark:text-white/40 group-hover/btn:text-slate-800 dark:group-hover/btn:text-white/80 transition-colors"
                   >
-                    <Download className="w-5 h-5" />
+                    <Download className="w-4.5 h-4.5 min-[360px]:w-5 min-[360px]:h-5" />
                   </motion.div>
                 </MagneticWrapper>
               </div>

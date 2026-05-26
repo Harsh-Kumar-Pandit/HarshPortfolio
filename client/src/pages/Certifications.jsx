@@ -45,7 +45,7 @@ const Certifications = () => {
         <meta name="description" content="A curated showcase of certifications reflecting my continuous learning across programming, networking, full-stack development, and core computer science." />
       </Helmet>
 
-      <div className="pt-12 pb-12 w-full min-h-screen relative">
+      <div className="pt-24 md:pt-12 pb-12 w-full min-h-screen relative">
         
         {/* ================= HERO SECTION ================= */}
         <section className="max-w-container-max mx-auto px-gutter mb-16 text-center">
@@ -93,12 +93,12 @@ const Certifications = () => {
         </section>
 
         {/* ================= SEARCH & FILTER SECTION ================= */}
-        <section className={`max-w-container-max mx-auto px-gutter mb-12 transition-all duration-300 ${
+        <section className={`max-w-container-max mx-auto px-4 md:px-gutter mb-12 transition-all duration-300 ${
           isSticky 
             ? 'sticky top-6 z-30' 
             : 'relative z-10'
         }`}>
-          <div className="flex flex-col md:flex-row gap-6 items-center justify-between bg-[#f8f9fb]/60 dark:bg-white/[0.02] backdrop-blur-xl border border-slate-200 dark:border-white/5 p-4 rounded-[2rem] shadow-sm">
+          <div className="flex flex-col md:flex-row gap-6 items-center justify-between bg-[#f8f9fb]/60 dark:bg-white/[0.02] backdrop-blur-xl border border-slate-200 dark:border-white/5 p-3 md:p-4 rounded-[2rem] shadow-sm">
             
             {/* Search Input */}
             <div className="relative w-full md:max-w-xs">
@@ -113,14 +113,14 @@ const Certifications = () => {
             </div>
 
             {/* Category Pills */}
-            <div className="flex flex-wrap gap-1.5 w-full md:w-auto justify-start md:justify-end">
+            <div className="flex flex-row overflow-x-auto no-scrollbar gap-1.5 w-full md:w-auto justify-start md:justify-end py-1 max-w-full">
               {CATEGORIES.map(category => {
                 const isActive = activeCategory === category;
                 return (
                   <button
                     key={category}
                     onClick={() => setActiveCategory(category)}
-                    className={`px-4 py-2 rounded-full text-xs font-semibold transition-all duration-300 relative ${
+                    className={`px-4 py-2 rounded-full text-xs font-semibold transition-all duration-300 relative whitespace-nowrap ${
                       isActive 
                         ? 'text-slate-900 dark:text-black font-semibold' 
                         : 'bg-slate-900/5 dark:bg-white/5 text-slate-500/60 dark:text-white/40 hover:bg-slate-900/10 dark:hover:bg-white/10 hover:text-slate-900 dark:hover:text-white/80 border border-slate-200 dark:border-white/5'

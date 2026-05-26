@@ -54,7 +54,7 @@ const Contact = () => {
         <meta name="description" content="Get in touch with Harsh Kumar Pandit, a B.Tech CSE student specializing in real-time MERN applications, AI-driven platforms, and interactive user experiences." />
       </Helmet>
 
-      <div className="pt-12 pb-20 px-gutter max-w-container-max mx-auto space-y-12">
+      <div className="pt-24 md:pt-12 pb-20 px-gutter max-w-container-max mx-auto space-y-12">
         <div className="text-center space-y-4 max-w-2xl mx-auto mb-16">
           <div className="inline-flex items-center px-3 py-1.5 bg-slate-900/5 dark:bg-white/5 border border-slate-900/10 dark:border-white/10 rounded-full text-xs font-semibold text-slate-800 dark:text-white/80">
             Get In Touch
