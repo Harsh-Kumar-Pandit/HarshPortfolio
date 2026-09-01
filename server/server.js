@@ -13,6 +13,14 @@ app.use(cors());
 app.use(express.json());
 
 // Basic API Root Route
+
+app.get("/", (req, res) => {
+  res.status(200).json({
+    status: "ok",
+    message: "Portfolio backend is running"
+  });
+});
+
 app.get('/api', (req, res) => {
   res.json({
     message: 'Welcome to Harsh.dev Portfolio API',
