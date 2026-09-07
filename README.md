@@ -152,5 +152,5 @@ cd client && npm run build   # outputs to dist/
 
 ## 👤 Author
 
-**Harsh Kumar Pandit** — B.Tech CSE, GGITS Jabalpur (RGPV)
+**Harsh Kumar Pandit**
 [GitHub](https://github.com/Harsh-Kumar-Pandit) · [Live Portfolio](https://harsh-portfolio-nu-inky.vercel.app)
